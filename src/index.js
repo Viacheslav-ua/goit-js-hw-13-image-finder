@@ -1,4 +1,4 @@
-// import './css/styles.css'
+ import './css/styles.css'
 // import fCountries from './js/fetchCountries'
 // import listCountriesTpl from './templates/listCountries.hbs';
 // import cardCountryTpl from './templates/cardCountry.hbs';
