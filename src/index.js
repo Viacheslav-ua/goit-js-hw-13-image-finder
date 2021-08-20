@@ -68,3 +68,33 @@
 //   refs.container.innerHTML = '';
 //   console.log('err', error);
 // }
+
+class GetJSON {
+//   constructor(url, obj) {
+//       this.url = url;
+//       this.obj = obj;
+// }
+
+  query(url, obj) {
+      // fetch(url, obj).then(response => response.json());
+    return url + obj
+  }
+}
+
+class GetPixabay extends GetJSON {
+  base_url = 'https://pixabay.com/api/';
+  api_key = '22997657-91d4620e666f378f8f41767fa';
+
+  // constructor(str) {
+  //     // super(url);
+  //     this.str = str;
+  // }
+
+  query() {
+    return  super.query(base_url, api_key)
+  }
+  
+}
+
+const x = new GetPixabay('jjjkkk');
+console.log(x.query);
