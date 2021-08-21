@@ -1,0 +1,35 @@
+.search-form {
+    padding: 20px;
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    background-color: tomato;
+}
+
+.gallery {
+    margin-top: 100px;
+}
+
+.stats-item {
+    font-size: 12px;
+}
+
+.material-icons {
+    font-size: 16px; 
+    color: teal;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.item {
+    display: inline-block;
+    padding: 5px;
+}
+
+#load-more-btn {
+    margin-left: 20px;
+}

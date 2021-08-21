@@ -102,30 +102,46 @@ import cardsPicturesTpl from './templates/cardsPictures.hbs';
 const refs = {
   container: document.querySelector('#gallery'),
   searchForm: document.querySelector('#search-form'),
-  // searchFiled: document.querySelector('#search-filed'),
+  clearPageBtn: document.querySelector('#clear-page-btn'),
   loadMoreBtn: document.querySelector('#load-more-btn'),
 };
 
 const pixabayApi = new PixabayApi();
 
 refs.searchForm.addEventListener('submit', onSearch);
-// refs.searchForm.addEventListener('click', onClickBtn);
-
-// function onClickBtn(e) {
-//   console.log(e.currentTarget.elements);
-// }
+refs.loadMoreBtn.addEventListener('click', onLoadMore);
+refs.clearPageBtn.addEventListener('click', onClearPage);
 
 function onSearch(e) {
   e.preventDefault();
   pixabayApi.query = e.currentTarget.elements.query.value;
-  pixabayApi.fetchPictures().then(renderGallery).catch(errResult);
+  pixabayApi.resetPage();
+  pixabayApi.fetchPictures()
+  .then(renderGallery)
+  .catch(errResult);
+}
+
+function onLoadMore() {
+  pixabayApi.fetchPictures()
+  .then(renderGallery)
+  .then(scroll)
+  .catch(errResult);
+}
+
+function scroll() {
+  refs.container.lastElementChild.scrollIntoView({behavior: "smooth"});
+}
+
+function onClearPage() {
+  refs.container.innerHTML = '';
 }
 
 function renderGallery(res) {
   const markup = cardsPicturesTpl(res.hits);
-  refs.container.insertAdjacentHTML('beforebegin', markup);
+  refs.container.insertAdjacentHTML('beforeend', markup);
 }
 
 function errResult(error) {
+  pixabayApi.resetPage();
   console.log('err', error);
 }

@@ -4,11 +4,22 @@ const API_KEY = '22997657-91d4620e666f378f8f41767fa';
 export default class PixabayJSON {
   constructor() {
     this.searchQuery = '';
+    this.page = 1;
   }
 
   fetchPictures() {
-    const url = `https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=${this.searchQuery}&page=1&per_page=12&key=22997657-91d4620e666f378f8f41767fa`;
-    return fetch(url).then(res => res.json());
+    const url = `${BASE_URL}?image_type=photo&orientation=horizontal&q=${this.searchQuery}
+      &page=${this.page}&per_page=12&key=${API_KEY}`;
+    return fetch(url)
+      .then(res => res.json())
+      .then(res => {
+        this.page += 1;
+        return res
+      });
+  }
+
+  resetPage() {
+    this.page = 1;
   }
 
   get query() {
