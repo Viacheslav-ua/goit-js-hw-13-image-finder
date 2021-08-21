@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Image finder</title>
-  
-</head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
-<body>
-  
-  <script src="./index.js"></script>
-</body>
+    <title>Image finder</title>
+  </head>
 
+  <body>
+    <form class="search-form" id="search-form">
+      <input
+        type="text"
+        name="query"
+        id="search-filed"
+        autocomplete="off"
+        placeholder="Search images..."
+      />
+      <button type="submit" class="search-btn">Search</button>
+      <button type="button" class="search-btn" id="load-more-btn">Load more</button>
+    </form>
+
+    <ul class="gallery" id="gallery"></ul>
+
+    <script src="./index.js"></script>
+  </body>
 </html>
