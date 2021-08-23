@@ -24,8 +24,10 @@ refs.container.addEventListener('click', onPicturesClick);
 function onSearch(e) {
   e.preventDefault();
   onClearPage();
+  if (e.currentTarget.elements.query.value === '') return;
   pixabayApi.query = e.currentTarget.elements.query.value;
   pixabayApi.resetPage();
+  e.currentTarget.elements.query.value = '';
   pixabayApi.fetchPictures()
     .then(renderGallery)
     .catch(errResult);

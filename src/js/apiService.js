@@ -7,15 +7,25 @@ export default class PixabayJSON {
     this.page = 1;
   }
 
-  fetchPictures() {
+  // fetchPictures() {
+  //   const url = `${BASE_URL}?image_type=photo&orientation=horizontal&q=${this.searchQuery}
+  //     &page=${this.page}&per_page=12&key=${API_KEY}`;
+  //   return fetch(url)
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       this.page += 1;
+  //       return res
+  //     });
+  // }
+
+  async fetchPictures() {
     const url = `${BASE_URL}?image_type=photo&orientation=horizontal&q=${this.searchQuery}
       &page=${this.page}&per_page=12&key=${API_KEY}`;
-    return fetch(url)
-      .then(res => res.json())
-      .then(res => {
-        this.page += 1;
-        return res
-      });
+    const response = await fetch(url);
+    const picturesJson = await response.json();
+    this.page += 1;
+
+    return picturesJson;
   }
 
   resetPage() {
