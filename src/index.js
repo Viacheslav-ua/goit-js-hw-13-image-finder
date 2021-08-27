@@ -21,23 +21,49 @@ refs.clearPageBtn.addEventListener('click', onClearPage);
 refs.container.addEventListener('click', onPicturesClick);
 
 
-function onSearch(e) {
+// function onSearch(e) {
+//   e.preventDefault();
+//   onClearPage();
+//   if (e.currentTarget.elements.query.value === '') return;
+//   pixabayApi.query = e.currentTarget.elements.query.value;
+//   pixabayApi.resetPage();
+//   e.currentTarget.elements.query.value = '';
+//   pixabayApi.fetchPictures()
+//     .then(renderGallery)
+//     .catch(errResult);
+// }
+
+async function onSearch(e) {
   e.preventDefault();
   onClearPage();
-  if (e.currentTarget.elements.query.value === '') return;
-  pixabayApi.query = e.currentTarget.elements.query.value;
+  if (e.currentTarget.elements.query.value.trim() === '') return;
+  pixabayApi.query = e.currentTarget.elements.query.value.trim();
   pixabayApi.resetPage();
   e.currentTarget.elements.query.value = '';
-  pixabayApi.fetchPictures()
-    .then(renderGallery)
-    .catch(errResult);
+  
+  try {
+  const result = await pixabayApi.fetchPictures()
+  renderGallery(result);
+  } catch(error) {
+  errResult(error);
+  }
 }
 
-function onLoadMore() {
-  pixabayApi.fetchPictures()
-    .then(renderGallery)
-    .then(scroll)
-    .catch(errResult);
+// function onLoadMore() {
+//   pixabayApi.fetchPictures()
+//     .then(renderGallery)
+//     .then(scroll)
+//     .catch(errResult);
+// }
+
+async function onLoadMore() {
+  try {
+    const result = await pixabayApi.fetchPictures();
+    renderGallery(result);
+    scroll(result);
+  } catch (error) {
+    errResult(error);
+  }
 }
 
 function scroll() {
